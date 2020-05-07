@@ -19,6 +19,10 @@ public class ReactiveController {
         this.reactiveService = reactiveService;
     }
 
+    /**
+     * Primeiro exemplo
+     */
+
     @GetMapping("/persons")
     Mono<Person> getPerson() {
         return reactiveService.findPerson();
@@ -35,6 +39,18 @@ public class ReactiveController {
     }
 
 
+    /**
+     * Segundo exemplo
+     */
 
+    @GetMapping(value = "/numbers-non-reactive")
+    public Integer[] numbersNonReactive() throws InterruptedException {
+        return reactiveService.getNumbersNonReactive();
+    }
+
+    @GetMapping(value = "/numbers-reactive", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<Integer> numbersReactive(){
+        return reactiveService.getNumbersReactive();
+    }
 
 }
